@@ -1,14 +1,7 @@
 package aztec
 
-class Role {
+class Role extends SecRole {
 
-	String authority
-
-	static mapping = {
-		cache true
-	}
-
-	static constraints = {
-		authority blank: false, unique: true
-	}
+    static constraints = {
+    }
 }

@@ -2,10 +2,9 @@ package aztec
 
 class Team {
 
-    String Name
+    String name
 	Season season
 	static hasMany = [coaches: Coach, players: Player]
-	static belongsTo = Coach
 	
 	static constraints = {
     }
