@@ -1,0 +1,35 @@
+.component_header {
+	font-size: 18px;
+}
+
+.component_help_link {
+	font-size: 10px;
+}
+
+.hide_help {
+	font-size: 10px;
+	padding: 5px 0px;
+}
+
+.component_help {
+	display: none;
+}
+
+.component_rating {
+	padding: 10px 0px;
+}
+
+.component_comment {
+	padding-bottom: 10px;
+	clear: both;
+}
+
+.component_label {
+	float: left;
+	width: 100px;
+	clear: both;
+}
+
+#overall_evaluation {
+	padding: 10px 0px;
+}

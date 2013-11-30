@@ -1,0 +1,65 @@
+.float {
+	float:left;
+}
+
+h1 {
+	text-align:center;
+}
+
+#player_report {
+	width: 950px;
+	float: left;
+}
+
+.training_attendance {
+	text-align:center;
+}
+
+.report_header_row {
+	text-align:center;
+	font-weight: 900;
+	font-size: 20px;
+}
+
+.report_row {
+	clear:both;
+}
+
+.report_field {
+	margin: 5px;
+	float: left;
+}
+
+.report_date {
+	width:100px;
+}
+
+.report_type {
+	width: 100px;
+}
+
+.reported_by {
+	width: 100px;
+}
+
+.report_details {
+	width: 300px;
+}
+
+.report_comment {
+	width: 300px;
+}
+
+.component_comment {
+	display: none;
+}
+
+.hide_comment {
+	font-size: 10px;
+	padding: 5px 0px;
+}
+
+.details_link {
+	font-size: 10px;
+}
+  
