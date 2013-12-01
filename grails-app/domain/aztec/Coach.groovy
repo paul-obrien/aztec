@@ -6,6 +6,5 @@ class Coach extends User {
 	static belongsTo = Team
 	static constraints = {
     }
-	
 }
 

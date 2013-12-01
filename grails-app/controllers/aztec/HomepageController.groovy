@@ -8,15 +8,25 @@ class HomepageController {
 	
 	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
 	def index() { 
-		user = currentUser()
-		if (user.hasRole('ROLE_ADMIN'))
-		  render(template: "admin")
-		else if (user.hasRole('ROLE_COACH'))
-		  render(template: "coach")		
-		else if (user.hasRole('ROLE_PLAYER'))
-		  render(template: "player")		
+		def user = currentUser()
+		if (user.authorities.any { it.authority == "ROLE_ADMIN" })
+		  redirect(action: "admin")
+		else if (user.authorities.any { it.authority == "ROLE_COACH" })
+		  redirect(action: "coach")		
+		else if (user.authorities.any { it.authority == "ROLE_PLAYER" })
+		  redirect(action: "player")		
 	}
 	
+	@Secured(['ROLE_ADMIN'])
+	def admin() {}
+	
+	@Secured(['ROLE_COACH'])
+	def coach() {
+		[currentUser : currentUser(), action : params['action']]
+	}
+	
+	@Secured(['ROLE_PLAYER'])
+	def player() {}
 	private currentUser() {
 		User.get(springSecurityService.principal.id)
 	}

@@ -9,8 +9,6 @@ class BootStrap {
 		def playerRole = SecRole.findByAuthority("ROLE_PLAYER") ?: new SecRole(authority: "ROLE_PLAYER").save()
 		
 		def sampleAdmins = [ 'admin@example.com' : [ password: 'admin', firstName: 'Andy', lastName: 'Administrator'] ]
-		def sampleCoaches = [ 'coach@example.com' : [ password: 'coach', firstName: 'Chris', lastName: 'Coach' ],
-			'coach2@example.com' : [password: 'coach', firstName: 'Jon', lastName: ''] ]
 
 		def users = User.list() ?: []
 		def admins, coaches, players, seasons, teams, coachEvaluations, selfEvaluations, sessionEvaluations, injuryReports
@@ -149,7 +147,7 @@ class BootStrap {
 			def fields = line.split(',')
 			def team = Team.findByName(fields[1])
 			def evaluation = new Report (
-				reportType: 'periodicCoach',
+				reportType: Report.PERIODIC_COACH_REPORT_TYPE,
 				coach: Coach.findByLastName(fields[0]),
 				team: team,
 				season: team.season,
@@ -177,7 +175,7 @@ class BootStrap {
 			def fields = line.split(',')
 			def team = Team.findByName(fields[0])
 			def evaluation = new Report(
-				reportType: 'self',
+				reportType: Report.SELF_REPORT_TYPE,
 				team: team,
 				season: team.season,
 				date: Date.parse('y-M-d', fields[1]),
@@ -205,12 +203,12 @@ class BootStrap {
 			def fields = line.split(',')
 		    def team = Team.findByName(fields[1])
 			def evaluation = new Report (
-				reportType: 'sessionCoach',
+				reportType: Report.SESSION_COACH_REPORT_TYPE,
 				coach: Coach.findByLastName(fields[0]),
 				team: team,
 				season: team.season,
 				date: Date.parse('y-M-d', fields[2]),
-				rating: fields[4]
+				overallRating: fields[4]
 		    )
 
 			def player = Player.findByLastName(fields[3])
@@ -228,8 +226,9 @@ class BootStrap {
 		new File('exampleData/injuries.csv').eachLine { line ->
 			def fields = line.split(',')
 		    def team = Team.findByName(fields[1])
+			println fields
 			def injury = new Report(
-				reportType: 'injury',
+				reportType: Report.INJURY_REPORT_TYPE,
 				coach: Coach.findByLastName(fields[0]),
 				team: team,
 				season: team.season,
@@ -243,6 +242,8 @@ class BootStrap {
 
 			if (finishCreateObject(injury))
 				injuries << injury
+				
+			println injury
 		}
 		
 		return injuries

@@ -8,4 +8,8 @@ class Team {
 	
 	static constraints = {
     }
+	
+	def playersByLastName() {
+		players.asList().sort({ it.lastName });
+	}
 }

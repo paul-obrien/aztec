@@ -9,10 +9,13 @@
       	<r:layoutResources/>
         <div class="menu">
           <sec:ifAllGranted roles="ROLE_ADMIN">
-             <g:render template="admin"/> 
+             <g:render template="/layouts/admin"/> 
           </sec:ifAllGranted>
           <sec:ifAllGranted roles="ROLE_COACH">
              <g:render template="/layouts/coach"/> 
+          </sec:ifAllGranted>
+          <sec:ifAllGranted roles="ROLE_PLAYER">
+             <g:render template="/layouts/player"/> 
           </sec:ifAllGranted>
         </div>
         <div class="body">
