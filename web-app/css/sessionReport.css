@@ -1,0 +1,29 @@
+.player_name {
+	width: 150px;
+	float: left;
+	clear: both;
+}
+
+.player_select {
+	float: left;
+}
+
+.player_rating {
+	padding: 10px;
+}
+
+#injury_report {
+	clear: both;
+}
+
+.injury_field {
+	padding: 10px;
+}
+
+.hidden_injury_field {
+	display: none;
+}
+
+#submit_button {
+	display:none;
+}
