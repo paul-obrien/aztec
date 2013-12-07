@@ -4,13 +4,11 @@ import java.util.Date;
 
 import grails.plugin.springsecurity.annotation.Secured
 
-class PlayerController {
+class PlayerController extends ApplicationController {
 
-   def springSecurityService
-	
     @Secured(['ROLE_ADMIN', 'ROLE_COACH', 'ROLE_PLAYER'])
 	def reports() {
-	  	render(view: 'reports', model: [ player : Player.get(params['id']), currentUser : currentUser() ])
+	  	render(view: 'reports', model: model([ player : Player.get(params['id'])]))
     }
 		
     @Secured(['ROLE_ADMIN', 'ROLE_COACH'])
@@ -31,7 +29,7 @@ class PlayerController {
 	@Secured(['ROLE_ADMIN', 'ROLE_COACH', 'ROLE_PLAYER'])
 	def evaluate() {
 		def team = isCurrentUserCoach() ? Team.get(params['team_id']) : currentUser().currentTeam
-		[player : getPlayer(), currentUser : currentUser(), team : team]
+		model([player : getPlayer(), team : team])
 	}
 	
     @Secured(['ROLE_ADMIN', 'ROLE_COACH', 'ROLE_PLAYER'])
@@ -50,11 +48,21 @@ class PlayerController {
 	  redirect(action: "reports", id: params['player_id'])
 	}
 	
-	private currentUser() {
-		User.get(springSecurityService.principal.id)
+	@Secured(['ROLE_ADMIN'])
+	def edit() {
+		model([player : Player.get(params['id']), doneSubmit : params['doneSubmit']])
 	}
 	
-	private isCurrentUserCoach() {
-		currentUser().authorities.any { it.authority == "ROLE_ADMIN" || it.authority == "ROLE_COACH" }
+	@Secured(['ROLE_ADMIN'])
+	def create() {
+		render(view: "edit", model: model([:]))		
+	}
+	
+	@Secured(['ROLE_ADMIN'])
+	def editSubmit() {
+		def player = (params['player_id'] ? Player.get(params['player_id']) : new Player(password : 'password'))
+		player.properties = params
+		player.save()
+		redirect(action: "edit", id: player.id, params : [doneSubmit : true])
 	}
 }

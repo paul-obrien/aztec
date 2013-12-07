@@ -2,10 +2,8 @@ package aztec
 
 import grails.plugin.springsecurity.annotation.Secured
 
-class HomepageController {
+class HomepageController extends ApplicationController {
 
-    def springSecurityService
-	
 	@Secured(['IS_AUTHENTICATED_REMEMBERED'])
 	def index() { 
 		def user = currentUser()
@@ -18,16 +16,17 @@ class HomepageController {
 	}
 	
 	@Secured(['ROLE_ADMIN'])
-	def admin() {}
+	def admin() {
+		model([:])
+	}
 	
 	@Secured(['ROLE_COACH'])
 	def coach() {
-		[currentUser : currentUser(), action : params['action']]
+		model([action : params['action']])
 	}
 	
 	@Secured(['ROLE_PLAYER'])
-	def player() {}
-	private currentUser() {
-		User.get(springSecurityService.principal.id)
+	def player() {
+		model([:])
 	}
 }

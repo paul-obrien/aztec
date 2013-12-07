@@ -4,13 +4,11 @@ import java.util.Date;
 
 import grails.plugin.springsecurity.annotation.Secured
 
-class TeamController {
+class TeamController extends ApplicationController {
 
-   def springSecurityService
-	
     @Secured(['ROLE_COACH'])
 	def sessionReport() {
-		[team : Team.get(params['id']), currentUser : currentUser()]
+		model([team : Team.get(params['id'])])
 	}
 	
     @Secured(['ROLE_COACH'])
@@ -32,7 +30,4 @@ class TeamController {
 	  redirect(controller: "homepage", action: "coach", params: [action : 'sessionReport'])
 	}
 	
-	private currentUser() {
-		User.get(springSecurityService.principal.id)
-	}
 }

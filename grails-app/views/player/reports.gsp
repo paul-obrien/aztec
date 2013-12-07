@@ -7,7 +7,11 @@
 		<div id="player_report">
 			<h1>${player.firstName} ${player.lastName}</h1>
 
-			<div class="training_attendance">
+			<div class="header_data">
+  				<a href="/aztec/player/edit/${player.id}">Edit Player Info</a>
+			</div>
+
+			<div class="header_data">
   				Training Attendance: ${player.trainingAttendance()[0]} / ${player.trainingAttendance()[1]}
 			</div>
 

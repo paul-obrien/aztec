@@ -1,3 +1,9 @@
+#player_evaluation {
+	float: left;
+	padding-left: 20px;
+	width: 600px;
+}
+
 .component_header {
 	font-size: 18px;
 }
@@ -21,12 +27,6 @@
 
 .component_comment {
 	padding-bottom: 10px;
-	clear: both;
-}
-
-.component_label {
-	float: left;
-	width: 100px;
 	clear: both;
 }
 

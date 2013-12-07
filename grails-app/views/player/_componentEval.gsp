@@ -13,8 +13,8 @@
 </div>
 <div>
   <div class="component_rating">
-    <div class="component_label">Rating:</div>
-    <div class="component_field">
+    <div class="form_label">Rating:</div>
+    <div class="form_field">
       <select name="${component}_rating">
         <g:each in="${aztec.Report.RATINGS}" var="item">
           <option value="${item.key}">${item.value}</option>
@@ -23,8 +23,8 @@
     </div>
   </div>
   <div class="component_comment">
-    <div class="component_label">Comment:</div>
-    <div class="component_field">
+    <div class="form_label">Comment:</div>
+    <div class="form_field">
       <textarea name="${component}_comment" rows=4 cols=80></textarea>
     </div>
   </div>
